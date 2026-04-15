@@ -1,0 +1,3 @@
+Este pequeno teste é um texto comum
+para a validação do funcionamento deste
+programa. 

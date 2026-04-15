@@ -1,0 +1,3 @@
+Texto comum.
+Este é um texto bem comum
+para validação.
