@@ -228,6 +228,58 @@ namespace Caderninho
                 default: Console.WriteLine("Opção inválida!"); Menu.MenuInicial(); break;
             }
         } // Menu editor, para selecionar o tipo de editor.
+        public static void EditorHTML(string path, string textoFinal)
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Menu.Show("EDITOR HTML");
+            Console.SetCursorPosition(2, 3);
+            Console.WriteLine("Para qual estilo de formatação deseja aplicar ao texto?");
+            Thread.Sleep(3000);
+            Console.SetCursorPosition(2, 5);
+            Console.WriteLine("[1] - Negrito");
+            Console.SetCursorPosition(2, 7);
+            Console.WriteLine("[2] - Itálico");
+            Console.SetCursorPosition(2, 9);
+            Console.WriteLine("[3] - Sublinhado");
+            Console.SetCursorPosition(2, 11);
+            Console.WriteLine("[4] - Riscado");
+            Console.SetCursorPosition(2, 13);
+            Console.WriteLine("[5] - Voltar ao menu de edição");
+            Console.SetCursorPosition(2, 14);
+            Console.WriteLine("[6] - Voltar ao menu principal");
+            Console.SetCursorPosition(2, 15);
+            Console.Write(" ");
+
+            var option = Convert.ToInt32(Console.ReadLine());
+
+            switch(option) {
+                case 1: // Negrito
+                    break;
+                case 2:// Itálico
+                    break;
+                case 3: // Sublinhado 
+                    break;
+                case 4: // Riscado
+                    break;
+                case 5: MenuEditar(path, textoFinal); break;
+                case 6: Menu.MenuInicial(); break;
+
+
+
+            } // Editor HTML
+        public static void EditorTextoSimples(string path, string textoFinal)
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Menu.Show("EDITOR DE TEXTO SIMPLES");
+            Console.SetCursorPosition(2, 3);
+            Console.WriteLine("Editor de Texto Simples em desenvolvimento...");
+            Thread.Sleep(3000);
+            ProximoPasso("", false, path, textoFinal);
+        } // Editor de texto simples
         public static void Remover(string nome, string path)
             {
                 Console.Clear();
