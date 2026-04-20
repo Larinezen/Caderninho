@@ -328,13 +328,18 @@ namespace Caderninho
                 {
                     // Lógica para remover o arquivo
                     File.Delete(path);
-                    Console.WriteLine($"Arquivo {nome}.txt removido com sucesso!");
+                Console.SetCursorPosition(2, 6);
+                Console.WriteLine($"Arquivo {nome}.txt");
+                    Thread.Sleep(2000);
+                Console.SetCursorPosition(2,8);
+                Console.WriteLine("Foi removido com sucesso!");
                     Thread.Sleep(3000);
                 AlgoMais();
                 }
                 else
                 {
-                    Console.WriteLine($"Arquivo {nome}.txt não removido.");
+                    Console.SetCursorPosition(2, 6);
+                Console.WriteLine($"Arquivo {nome}.txt não removido.");
                     Thread.Sleep(2000);
                     AlgoMais();
                 }
