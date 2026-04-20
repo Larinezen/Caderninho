@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
 
@@ -27,7 +28,9 @@ namespace Caderninho
             var path = Path.Combine(directory, $"{nome}.txt");
 
             Console.Clear();
-            Console.WriteLine("Digite o conteúdo do arquivo (Digite OK para finalizar):");
+            Menu.LinhaSeparadora();
+            Console.WriteLine("  Digite o conteúdo do arquivo (Digite OK para finalizar):");
+            Menu.LinhaSeparadora();
             var conteudo = new StringBuilder();
 
             while (true)
@@ -52,14 +55,28 @@ namespace Caderninho
             Console.WriteLine(" ");
             Menu.LinhaSeparadora();
             Thread.Sleep(3000);
-            Console.WriteLine(" Para prosseguir com os próximos passos digite [OK]");
-            var proximoPasso = Console.ReadLine();
+            Console.WriteLine(" Para prosseguir com os próximos passos  [ENTER]");
+            Console.ReadKey();
             var textoSalvo = false;
-            if (proximoPasso.Equals("OK", StringComparison.OrdinalIgnoreCase))
+            if (Console.ReadKey().Key == ConsoleKey.Enter)
             {
-                ProximoPasso(nome,textoSalvo,path, textoFinal);
+                ProximoPasso(nome, textoSalvo, path, textoFinal);
             }
-
+            else
+            {
+                Console.WriteLine("Opção Inválida, para prosseguir [ENTER] para retornar ao menu incial [ESC]");
+                Console.ReadKey();
+                if(Console.ReadKey().Key == ConsoleKey.Enter)
+                {
+                    ProximoPasso(nome, textoSalvo, path, textoFinal);
+                }
+                else
+                {
+                    Console.WriteLine("Retornando ao Menu Inicial..");
+                    Thread.Sleep(2000);
+                    Menu.MenuInicial();
+                }
+            }
 
         } // Método criação de arquivo
 
@@ -85,11 +102,30 @@ namespace Caderninho
                 var conteudo = File.ReadAllText(path);
                 Console.Clear();
                 Console.WriteLine($"Conteúdo do arquivo {nome}.txt:");
+                Console.WriteLine("Para seguir com os próximos passos [ENTER]");
                 Console.WriteLine(" ");
                 Console.Write(conteudo);
                 Console.WriteLine(" ");
                 var textoSalvo = true;
-                ProximoPasso(nome,textoSalvo,path, conteudo);
+                Console.ReadKey();
+                if(Console.ReadKey().Key == ConsoleKey.Enter)
+                {
+                    ProximoPasso(nome, textoSalvo, path, conteudo);
+
+                }
+                else
+                {
+                    Console.Write(" Opção inválida, selecione [ENTER] para seguir para os próximos passos.");
+                    Console.ReadKey();
+                    if (Console.ReadKey().Key == ConsoleKey.Enter)
+                    {
+                        ProximoPasso(nome, textoSalvo, path, conteudo);
+
+                    }
+                    AlgoMais();
+
+                }
+
             }
             else
             {
@@ -127,12 +163,14 @@ namespace Caderninho
                 Console.WriteLine("[4] Remover ");
                 Console.SetCursorPosition(2, 15);
                 Console.WriteLine("[5] Sair ");
-                var opcao = Convert.ToInt32(Console.ReadLine());
+                Console.SetCursorPosition(2, 17);
+                var opcao = Console.ReadLine();
+                var opcaoFormatada = Convert.ToInt32(opcao);
 
-                switch (opcao)
+                switch (opcaoFormatada)
                 {
                     case 1: Salvar(nome,path, textoFinal); break;
-                    case 2: MenuEditar(path, textoFinal); break;
+                    case 2: MenuEditar(nome,path, textoFinal); break;
                     case 3: Menu.MenuInicial(); break;
                     case 4: Remover(nome,path); break;
                     case 5: Encerrar(); break;
@@ -152,9 +190,10 @@ namespace Caderninho
                 Console.WriteLine("[3] Sair");
                 Console.SetCursorPosition(2, 13);
                 Console.Write(" ");
-                var opcao = Convert.ToInt32(Console.ReadLine());
+                var opcao = Console.ReadLine();
+                var opcaoFormatada = Convert.ToInt32(opcao);
 
-                switch (opcao)
+                switch (opcaoFormatada)
                 {
                     case 1: Salvar(nome,path, textoFinal); break;
                     case 2: Menu.MenuInicial(); break;
@@ -185,7 +224,9 @@ namespace Caderninho
             {
                 File.WriteAllText(path, textoFinal);
                 Console.SetCursorPosition(2, 6);
-                Console.WriteLine($"Arquivo {nome}.txt salvo com sucesso!Caminho: {path}");
+                Console.WriteLine($"Arquivo {nome}.txt salvo com sucesso.");
+                Console.Write(" ");
+                Console.SetCursorPosition(2, 8);
                 Console.WriteLine($"Caminho: {path}");
                 Thread.Sleep(5000);
                 AlgoMais();
@@ -198,87 +239,76 @@ namespace Caderninho
                 AlgoMais();
             }
         } // Salvar arquivos
-        public static void MenuEditar(string path, string textoFinal)
+        public static void MenuEditar(string nome, string path, string textoFinal)
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
+            Console.BackgroundColor= ConsoleColor.Magenta;
+            Console.ForegroundColor= ConsoleColor.Black;
             Menu.Show("EDITAR ARQUIVO");
             Console.SetCursorPosition(2, 3);
             Console.WriteLine("Selecione uma opção de edição:");
-            Console.SetCursorPosition(2, 5);
-            Console.WriteLine("[1] - Editor HTML ");
             Console.SetCursorPosition (2, 7);
-            Console.WriteLine("[2] - Editor de Texto Simples");
-            Thread.Sleep(2000);
+            Console.WriteLine("[1] - Editor de Texto Simples");
             Console.SetCursorPosition(2, 9);
             Console.WriteLine("Para retornar ao MENU digite [0]");
-            Console.SetCursorPosition(2, 10);
-            Console.WriteLine(" ");
-            var option = Convert.ToInt32(Console.ReadLine());
+            Console.SetCursorPosition(2, 11);
+            Console.Write(" ");
+            var option = Console.ReadLine();
+            var opcFormatado = Convert.ToInt32(option);
 
-            switch(option) {
-                case 1: // Editor HTML
-                    // Chamar função do editor HTML
-                    break;
-                case 2: // Editor de Texto Simples
-                    // Chamar função do editor de texto simples
-                    break;
-                case 0: Menu.MenuInicial(); break;
+            switch(opcFormatado) {
+             
+                case 1: EditorTextoSimples(nome,path, textoFinal);break;
                 default: Console.WriteLine("Opção inválida!"); Menu.MenuInicial(); break;
             }
+
         } // Menu editor, para selecionar o tipo de editor.
-        public static void EditorHTML(string path, string textoFinal)
+        public static void EditorTextoSimples(string nome, string path, string textoFinal)
         {
+            Console.Clear();
+            Menu.LinhaSeparadora();
+            var conteudoAtualizado = new StringBuilder(textoFinal);
+            Console.WriteLine("  Digite o conteúdo do arquivo (Digite OK para finalizar)");
+            Menu.LinhaSeparadora();
+            while (true)
+            {
+                var linha = Console.ReadLine();
+                if (linha.Equals("OK", StringComparison.OrdinalIgnoreCase))
+                {
+                    break;
+                }
+                conteudoAtualizado.AppendLine(linha);
+            }
+            
+            var atualizacao = conteudoAtualizado.ToString();
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
-            Menu.Show("EDITOR HTML");
-            Console.SetCursorPosition(2, 3);
-            Console.WriteLine("Para qual estilo de formatação deseja aplicar ao texto?");
-            Thread.Sleep(3000);
-            Console.SetCursorPosition(2, 5);
-            Console.WriteLine("[1] - Negrito");
-            Console.SetCursorPosition(2, 7);
-            Console.WriteLine("[2] - Itálico");
-            Console.SetCursorPosition(2, 9);
-            Console.WriteLine("[3] - Sublinhado");
-            Console.SetCursorPosition(2, 11);
-            Console.WriteLine("[4] - Riscado");
-            Console.SetCursorPosition(2, 13);
-            Console.WriteLine("[5] - Voltar ao menu de edição");
-            Console.SetCursorPosition(2, 14);
-            Console.WriteLine("[6] - Voltar ao menu principal");
-            Console.SetCursorPosition(2, 15);
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Menu.Show($"Conteudo atualizado");
+            Carregando();
+            Menu.LinhaSeparadora();
+            Console.WriteLine("  Para prosseguir com os próximos passos [ENTER]");
+            Menu.LinhaSeparadora();
             Console.Write(" ");
+            Console.Write(atualizacao);
+            Console.Write(" ");
+            Console.ReadKey();
+            var textoSalvo = false;
+            if(Console.ReadKey().Key == ConsoleKey.Enter)
+            {
+                ProximoPasso(nome,textoSalvo, path, atualizacao);
+            }
+            else
+            {
+                Console.WriteLine("Opção inválida");
+                Thread.Sleep(3000);
+                AlgoMais();
+            }
 
-            var option = Convert.ToInt32(Console.ReadLine());
-
-            switch(option) {
-                case 1: // Negrito
-                    break;
-                case 2:// Itálico
-                    break;
-                case 3: // Sublinhado 
-                    break;
-                case 4: // Riscado
-                    break;
-                case 5: MenuEditar(path, textoFinal); break;
-                case 6: Menu.MenuInicial(); break;
-
-
-
-            } // Editor HTML
-        public static void EditorTextoSimples(string path, string textoFinal)
-        {
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Clear();
-            Menu.Show("EDITOR DE TEXTO SIMPLES");
-            Console.SetCursorPosition(2, 3);
-            Console.WriteLine("Editor de Texto Simples em desenvolvimento...");
-            Thread.Sleep(3000);
-            ProximoPasso("", false, path, textoFinal);
         } // Editor de texto simples
         public static void Remover(string nome, string path)
             {

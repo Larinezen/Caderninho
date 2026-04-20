@@ -9,6 +9,7 @@ namespace Caderninho
     public class Menu
     {
         const int largura = 60; // Constante unica da largura que será utilizada.
+        const int altura = 20; // Constante unica da altura que será utilizada.
         public static void MenuInicial()
         {
 
@@ -61,7 +62,7 @@ namespace Caderninho
         {
             {
                 Console.Write("|");
-                for (int i = 0; i < 60; i++)
+                for (int i = 0; i < largura; i++)
                 {
                     Console.Write("-");
 
@@ -89,7 +90,7 @@ namespace Caderninho
         public static void LinhaSeparadora()
         {
             Console.Write("|");
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < largura; i++)
             {
                 Console.Write("=");
             }
@@ -99,10 +100,10 @@ namespace Caderninho
         // Método desenha o corpo da tela do menu
         public static void Corpo()
         {
-            for (int lines = 0; lines < 15; lines++)
+            for (int lines = 0; lines < altura; lines++)
             {
                 Console.Write("|");
-                for (int i = 0; i < 60; i++)
+                for (int i = 0; i < largura; i++)
                 {
                     Console.Write(" ");
                 }
