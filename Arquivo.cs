@@ -56,9 +56,9 @@ namespace Caderninho
             Menu.LinhaSeparadora();
             Thread.Sleep(3000);
             Console.WriteLine(" Para prosseguir com os próximos passos  [ENTER]");
-            Console.ReadKey();
+            Console.ReadKey(true);
             var textoSalvo = false;
-            if (Console.ReadKey().Key == ConsoleKey.Enter)
+            if (Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 ProximoPasso(nome, textoSalvo, path, textoFinal);
             }
@@ -66,7 +66,7 @@ namespace Caderninho
             {
                 Console.WriteLine("Opção Inválida, para prosseguir [ENTER] para retornar ao menu incial [ESC]");
                 Console.ReadKey();
-                if(Console.ReadKey().Key == ConsoleKey.Enter)
+                if(Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
                     ProximoPasso(nome, textoSalvo, path, textoFinal);
                 }
@@ -107,17 +107,17 @@ namespace Caderninho
                 Console.Write(conteudo);
                 Console.WriteLine(" ");
                 var textoSalvo = true;
-                Console.ReadKey();
-                if(Console.ReadKey().Key == ConsoleKey.Enter)
+                Console.ReadKey(true);
+                if(Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
                     ProximoPasso(nome, textoSalvo, path, conteudo);
 
                 }
                 else
                 {
-                    Console.Write(" Opção inválida, selecione [ENTER] para seguir para os próximos passos.");
-                    Console.ReadKey();
-                    if (Console.ReadKey().Key == ConsoleKey.Enter)
+                    Console.Write("Opção inválida, selecione [ENTER] para seguir para os próximos passos.");
+                    Console.ReadKey(true);
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
                         ProximoPasso(nome, textoSalvo, path, conteudo);
 
@@ -174,7 +174,7 @@ namespace Caderninho
                     case 3: Menu.MenuInicial(); break;
                     case 4: Remover(nome,path); break;
                     case 5: Encerrar(); break;
-                    default: Console.WriteLine("Opção inválida!"); Thread.Sleep(2000); Menu.MenuInicial(); break; // REVISAR
+                    default: Console.WriteLine("  Opção inválida!"); Thread.Sleep(2000); Menu.MenuInicial(); break; // REVISAR
 
                 }
             }
@@ -189,7 +189,7 @@ namespace Caderninho
                 Console.SetCursorPosition(2, 11);
                 Console.WriteLine("[3] Sair");
                 Console.SetCursorPosition(2, 13);
-                Console.Write(" ");
+                Console.Write(" ");   
                 var opcao = Console.ReadLine();
                 var opcaoFormatada = Convert.ToInt32(opcao);
 
@@ -224,7 +224,7 @@ namespace Caderninho
             {
                 File.WriteAllText(path, textoFinal);
                 Console.SetCursorPosition(2, 6);
-                Console.WriteLine($"Arquivo {nome}.txt salvo com sucesso.");
+                Console.WriteLine($"Arquivo salvo com sucesso.");
                 Console.Write(" ");
                 Console.SetCursorPosition(2, 8);
                 Console.WriteLine($"Caminho: {path}");
@@ -296,9 +296,9 @@ namespace Caderninho
             Console.Write(" ");
             Console.Write(atualizacao);
             Console.Write(" ");
-            Console.ReadKey();
+            Console.ReadKey(true);
             var textoSalvo = false;
-            if(Console.ReadKey().Key == ConsoleKey.Enter)
+            if(Console.ReadKey(true).Key == ConsoleKey.Enter)
             {
                 ProximoPasso(nome,textoSalvo, path, atualizacao);
             }
@@ -329,7 +329,8 @@ namespace Caderninho
                     // Lógica para remover o arquivo
                     File.Delete(path);
                     Console.WriteLine($"Arquivo {nome}.txt removido com sucesso!");
-                    AlgoMais();
+                    Thread.Sleep(3000);
+                AlgoMais();
                 }
                 else
                 {
