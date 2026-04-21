@@ -34,6 +34,6 @@ Para aprimorar a experiência de uso, foram incluídos métodos de apoio:
 
 O Projeto Caderninho serviu como um laboratório para a prática de fundamentos essenciais em C#, como manipulação de arquivos (System.IO), modularização de métodos e lógica de navegação. A experiência demonstra que a atenção aos detalhes visuais e à estrutura de código é válida em qualquer nível de desenvolvimento, independentemente da complexidade da ferramenta.
 
-## Fluxograma do projeto
+## Projeto Caderninho - Fluxograma
 
 ![Fluxograma](https://github.com/Larinezen/Caderninho/blob/master/caderninho-fluxo.png?raw=true)
